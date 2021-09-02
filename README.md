@@ -26,6 +26,8 @@ npm install
 npm run dev
 ```
 
+That's all!
+
 ## Commands
 
 This template only comes with 2 necessary commands:
