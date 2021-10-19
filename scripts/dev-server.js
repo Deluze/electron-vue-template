@@ -5,6 +5,8 @@ const ChildProcess = require('child_process');
 const Path = require('path');
 const Chalk = require('chalk');
 const Chokidar = require('chokidar');
+const Electron = require('electron');
+const { exit } = require('process');
 
 let electronProcess = null;
 let rendererPort = 0;
@@ -25,7 +27,12 @@ function startElectron() {
         return;
     }
 
-    electronProcess = ChildProcess.spawn('electron', [Path.join('src', 'main', 'main.js'), `${rendererPort}`]);
+    const args = [
+        Path.join(__dirname, '..', 'src', 'main', 'main.js'),
+        rendererPort,
+    ];
+
+    electronProcess = ChildProcess.spawn(Electron, args);
 
     electronProcess.stdout.on('data', data => {
         console.log(Chalk.blueBright(`[Electron] `) + Chalk.white(data.toString()));

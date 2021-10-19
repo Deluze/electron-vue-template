@@ -5,7 +5,8 @@
   "main": "src/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "electron": "electron src/main/main.js"
   },
   "repository": "https://github.com/deluze/electron-vue-template",
   "author": {
