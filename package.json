@@ -5,8 +5,7 @@
   "main": "src/main/main.js",
   "scripts": {
     "dev": "node scripts/dev-server.js",
-    "build": "node scripts/build.js",
-    "electron": "electron src/main/main.js"
+    "build": "node scripts/build.js"
   },
   "repository": "https://github.com/deluze/electron-vue-template",
   "author": {
@@ -14,13 +13,13 @@
     "url": "https://github.com/Deluze"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.4.0",
-    "@vue/cli": "^4.5.13",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vue/cli": "^4.5.14",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.2",
-    "electron": "^13.1.8",
-    "electron-builder": "^22.11.7",
-    "vite": "^2.4.4"
+    "electron": "^15.2.0",
+    "electron-builder": "^22.13.1",
+    "vite": "^2.6.10"
   },
   "dependencies": {
     "vue": "^3.0.6"
