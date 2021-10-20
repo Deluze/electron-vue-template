@@ -6,7 +6,7 @@ A template that comes with an Electron application bundled with VueJS 3.
 
 This project got inspired by [electron-vue](https://github.com/SimulatedGREG/electron-vue)
 
-electron-vue-template uses updated Electron/Vue versions and build tools! 👍 The idea of this template is to keep it a really simple Electron application without an unnecessary amount of dependency overhead.
+electron-vue-template uses updated Electron/Vue versions and build tools! 👍 The idea of this template is to keep it a really simple Electron application without unnecessary dependency overhead.
 
 ## About
 
