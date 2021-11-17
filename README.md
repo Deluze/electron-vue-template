@@ -30,12 +30,18 @@ That's all!
 
 ## Commands
 
-This template only comes with 2 necessary commands:
-
 ```bash
-npm run dev # start Electron application and ViteJS devserver for development
-npm run build # builds the renderer with ViteJS and compiles it with Electron Builder
+npm run dev # starts application with hot reload and HMR
+npm run build # builds application
+
+# OR
+
+npm run build:win # uses windows as build target
+npm run build:mac # uses mac as build target
+npm run build:linux # uses linux as build target
 ```
+
+Optional configuration options can be found in the [Electron Builder CLI docs](https://www.electron.build/cli.html).
 
 ## Project Structure
 
@@ -43,7 +49,7 @@ npm run build # builds the renderer with ViteJS and compiles it with Electron Bu
 - root
   - config/
     - vite.js # ViteJS configuration
-    - electron-builder.js # Electron Builder configuration
+    - electron-builder.json # Electron Builder configuration
   - scripts/ # all the scripts used to build or serve your application, change as you like.
   - src/
     - main/ # Main thread (Electron application source)
