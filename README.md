@@ -31,7 +31,7 @@ That's all!
 ## Commands
 
 ```bash
-npm run dev # starts application with hot reload and HMR
+npm run dev # starts application with hot reload
 npm run build # builds application
 
 # OR
