@@ -54,7 +54,7 @@ Optional configuration options can be found in the [Electron Builder CLI docs](h
 
 ## Using static files
 
-If you have any files that you want to copy over to the app directory after installation, you will need to add those files to the `src/main/static`.
+If you have any files that you want to copy over to the app directory after installation, you will need to add those files in your `src/main/static` directory.
 
 #### Referencing static files from your main process
 
