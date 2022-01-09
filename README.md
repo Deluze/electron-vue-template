@@ -1,23 +1,19 @@
 # Electron Vue Template
 
-A template that comes with an Electron application bundled with VueJS 3.
-
-## Why?
-
-This project got inspired by [electron-vue](https://github.com/SimulatedGREG/electron-vue)
-
-electron-vue-template uses updated Electron/Vue versions and build tools! 👍 The idea of this template is to keep it a really simple Electron application without unnecessary dependency overhead.
+A starter template that's bundled together with **VueJS 3.x**, **Electron 16.x**, **ViteJS** and **Electron Builder** 👌
 
 ## About
 
+This project got inspired by [electron-vue](https://github.com/SimulatedGREG/electron-vue)
+
 This template uses [ViteJS](https://vitejs.dev) for the development server providing HMR (Hot Reload) while developing your Electron app.\
-Building the Electron application is done by [Electron Builder](https://www.electron.build/), making your application cross-platform and easily distributable.
+Building the Electron application is done by [Electron Builder](https://www.electron.build/), making your application cross-platform and easily distributable, it also supports cross-platform compilation!
 
 This template doesn't come with any unnecessary dependencies and is unopinionated, so you can start developing your Electron / Vue applications however you want.
 
-## Get Started
+## Getting started
 
-To start developing your Electron application execute the following commands:
+Execute the following commands to start developing straight away:
 
 ```bash
 git clone https://github.com/Deluze/electron-vue-template
