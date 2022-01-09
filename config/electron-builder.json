@@ -30,6 +30,11 @@
             "from": "build/renderer",
             "to": "renderer",
             "filter": ["**/*"]
+        },
+        {
+            "from": "src/main/static",
+            "to": "static",
+            "filter": ["**/*"]
         }
     ]
 }
