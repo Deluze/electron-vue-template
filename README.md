@@ -51,3 +51,20 @@ Optional configuration options can be found in the [Electron Builder CLI docs](h
     - main/ # Main thread (Electron application source)
     - renderer/ # Renderer thread (VueJS application source)
 ```
+
+## Using static files
+
+If you have any files that you want to copy over to the app directory after installation, you will need to add those files to the `src/main/static`.
+
+#### Referencing static files from your main process
+
+```js
+/* Assumes src/main/static/yourFile.txt exists */
+
+const { app } = require('electron');
+const FileSystem = require('fs');
+const Path = require('path');
+
+const path = Path.join(app.getAppPath(), 'static', 'yourFile.txt');
+const contents = FileSystem.readFileSync(path);
+```
