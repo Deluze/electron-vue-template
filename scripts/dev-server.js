@@ -1,25 +1,28 @@
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'development'
 
-const Vite = require('vite');
-const ChildProcess = require('child_process');
-const Path = require('path');
-const Chalk = require('chalk');
-const Chokidar = require('chokidar');
-const Electron = require('electron');
-const { exit } = require('process');
+import Vite from 'vite'
+import ChildProcess from 'child_process'
+import path from 'path'
+import Chalk from 'chalk'
+import Chokidar from 'chokidar'
+import Electron from 'electron'
+import { exit } from 'process'
+import { fileURLToPath } from 'url'
 
-let electronProcess = null;
-let rendererPort = 0;
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+let electronProcess = null
+let rendererPort = 0
 
 async function startRenderer() {
-    const config = require(Path.join('..', 'config', 'vite.js'));
+    const config = await import('../config/vite.js')
 
     const server = await Vite.createServer({
-        ...config,
-        mode: 'development',
-    });
+        ...config.default,
+        mode: 'development'
+    })
 
-    return server.listen();
+    return server.listen()
 }
 
 function startElectron() {
@@ -28,43 +31,44 @@ function startElectron() {
     }
 
     const args = [
-        Path.join(__dirname, '..', 'src', 'main', 'main.js'),
-        rendererPort,
-    ];
+        // path.join(__dirname, '..', 'src', 'main', 'main.js'),
+        path.join(__dirname, '..', 'main.cjs'),
+        rendererPort
+    ]
 
-    electronProcess = ChildProcess.spawn(Electron, args);
+    electronProcess = ChildProcess.spawn(Electron, args)
 
     electronProcess.stdout.on('data', data => {
-        console.log(Chalk.blueBright(`[Electron] `) + Chalk.white(data.toString()));
-    });
+        console.log(Chalk.blueBright(`[Electron] `) + Chalk.white(data.toString()))
+    })
 
     electronProcess.stderr.on('data', data => {
-        console.log(Chalk.redBright(`[Electron] `) + Chalk.white(data.toString()));
+        console.log(Chalk.redBright(`[Electron] `) + Chalk.white(data.toString()))
     })
 }
 
 function restartElectron() {
     if (electronProcess) {
-        electronProcess.kill();
-        electronProcess = null;
+        electronProcess.kill()
+        electronProcess = null
     }
 
     startElectron();
 }
 
 async function start() {
-    console.log(`${Chalk.blueBright('===============================')}`);
-    console.log(`${Chalk.blueBright('Starting Electron + Vite Dev Server...')}`);
-    console.log(`${Chalk.blueBright('===============================')}`);
+    console.log(`${Chalk.blueBright('======================================')}`)
+    console.log(`${Chalk.blueBright('Starting Electron + Vite Dev Server...')}`)
+    console.log(`${Chalk.blueBright('======================================')}`)
 
-    const devServer = await startRenderer();
-    rendererPort = devServer.config.server.port;
+    const devServer = await startRenderer()
+    rendererPort = devServer.config.server.port
 
-    startElectron();
+    startElectron()
 
-    Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
-        restartElectron();
+    Chokidar.watch(path.join(__dirname, '..', 'src', 'main')).on('change', () => {
+        restartElectron()
     })
 }
 
-start();
+start()

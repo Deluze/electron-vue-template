@@ -7,7 +7,7 @@
 <script>
 import { defineComponent } from 'vue';
 import Hello from './components/Hello.vue'
-import { ipcRenderer } from '@/electron';
+import { ipcRenderer } from './electron.js';
 
 
 export default defineComponent({

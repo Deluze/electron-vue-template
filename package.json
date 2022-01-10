@@ -2,7 +2,8 @@
   "name": "electron-vue-template",
   "version": "0.1.0",
   "description": "A minimal Electron + Vue application",
-  "main": "src/main/main.js",
+  "main": "main.cjs",
+  "type": "module",
   "scripts": {
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json",
@@ -16,13 +17,13 @@
     "url": "https://github.com/Deluze"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/cli": "^4.5.14",
-    "chalk": "^4.1.2",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "@vue/cli": "^4.5.15",
+    "chalk": "^5.0.0",
     "chokidar": "^3.5.2",
-    "electron": "^15.2.0",
-    "electron-builder": "^22.13.1",
-    "vite": "^2.6.10"
+    "electron": "^16.0.6",
+    "electron-builder": "^22.14.5",
+    "vite": "^2.7.10"
   },
   "dependencies": {
     "vue": "^3.0.6"
