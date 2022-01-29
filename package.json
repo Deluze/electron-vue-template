@@ -4,11 +4,16 @@
   "description": "A minimal Electron + Vue application",
   "main": "src/main/main.js",
   "scripts": {
-    "dev": "node scripts/dev-server.js",
-    "build": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json",
-    "build:win": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --win",
-    "build:mac": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --mac",
-    "build:linux": "node scripts/build-vue.js && electron-builder -c config/electron-builder.json --linux"
+    "tsc-scripts": "cd scripts/ && tsc",
+    "tsc-mian": "cd src/main && tsc",
+    "tsc-render": "cd src/renderer && vue-tsc",
+    "predev": "npm run tsc-scripts",
+    "dev": "node --enable-source-maps --unhandled-rejections=strict scripts/dev-server.js ",
+    "prebuild": "npm run tsc-mian && npm run tsc-render && npm run tsc-scripts",
+    "build": "node --enable-source-maps --unhandled-rejections=strict scripts/build-vue.js && electron-builder -c config/electron-builder.json",
+    "build:win": "node --enable-source-maps --unhandled-rejections=strict scripts/build-vue.js && electron-builder -c config/electron-builder.json --win",
+    "build:mac": "node --enable-source-maps --unhandled-rejections=strict scripts/build-vue.js && electron-builder -c config/electron-builder.json --mac",
+    "build:linux": "node --enable-source-maps --unhandled-rejections=strict scripts/build-vue.js && electron-builder -c config/electron-builder.json --linux"
   },
   "repository": "https://github.com/deluze/electron-vue-template",
   "author": {
@@ -16,7 +21,8 @@
     "url": "https://github.com/Deluze"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.0.1",
+    "@types/humanize-duration": "^3.27.1",
+    "@vitejs/plugin-vue": "^2.1.0",
     "@vue/cli": "^4.5.15",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
@@ -25,6 +31,11 @@
     "vite": "^2.7.13"
   },
   "dependencies": {
-    "vue": "^3.2.27"
+    "find-process": "^1.4.7",
+    "humanize-duration": "^3.27.1",
+    "ora": "^5.4.1",
+    "tree-kill": "^1.2.2",
+    "vue": "^3.0.6",
+    "vue-tsc": "^0.31.1"
   }
 }

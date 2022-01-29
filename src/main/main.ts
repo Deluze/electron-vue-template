@@ -1,12 +1,20 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
-const Path = require('path')
+import {app, BrowserWindow, ipcMain} from "electron";
+import * as path from "path";
+
+app.commandLine.appendSwitch('remote-debugging-port', '9222')
+console.log("test 23");
+
+//uncoment to throw error, when start electron might also need to start node in the rigth mode like for the dev script
+// ddd what error please
+
+let test: string = "aha";
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: Path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     }
@@ -17,7 +25,7 @@ function createWindow () {
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   }
   else {
-    mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
+    mainWindow.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html'));
   }
 }
 

@@ -2,7 +2,7 @@
   <div id="hello">
     <img src="http://vuejs.org/images/logo.png">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h2>Essential Links 3</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
       <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
@@ -19,13 +19,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {defineComponent} from 'vue';
 
 export default defineComponent({
   setup() {
+    let msg: string = "Whoop for dev";
     return {
-      msg: 'Electron + Vue 3 template'
+      msg: 'Electron + Vue 3 template' + msg
     }
   }
 });
