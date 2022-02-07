@@ -1,7 +1,7 @@
 {
     "appId": "com.electron.app",
     "directories": {
-        "output": "dist" 
+        "output": "dist"
     },
     "nsis": {
         "oneClick": false,
