@@ -1,7 +1,7 @@
 {
     "appId": "com.electron.app",
     "directories": {
-        "output": "dist"
+        "output": "dist" 
     },
     "nsis": {
         "oneClick": false,
@@ -16,16 +16,7 @@
         "target": ["snap"]
     },
     "files": [
-        "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-        "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-        "!**/node_modules/*.d.ts",
-        "!**/node_modules/.bin",
-        "!src/renderer",
-        "!config",
-        "!README.md",
-        "!scripts",
-        "!build",
-        "!dist",
+        "build/main/**/*",
         {
             "from": "build/renderer",
             "to": "renderer",
@@ -35,6 +26,16 @@
             "from": "src/main/static",
             "to": "static",
             "filter": ["**/*"]
-        }
+        },
+        "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+        "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+        "!**/node_modules/*.d.ts",
+        "!**/node_modules/.bin",
+        "!src",
+        "!config",
+        "!README.md",
+        "!scripts",
+        "!build/renderer",
+        "!dist"
     ]
 }
