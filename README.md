@@ -1,6 +1,6 @@
 # Electron Vue Template
 
-A starter template that's bundled together with **VueJS 3.x**, **Electron 16.x**, **ViteJS** and **Electron Builder** 👌
+A TypeScript starter template that's bundled together with **VueJS 3.x**, **Electron 16.x**, **ViteJS** and **Electron Builder** 👌
 
 ## About
 
