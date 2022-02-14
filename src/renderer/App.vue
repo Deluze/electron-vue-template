@@ -4,11 +4,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue';
 import Hello from './components/Hello.vue'
-import { ipcRenderer } from '@/electron';
-
+import { ipcRenderer } from './electron'
 
 export default defineComponent({
   name: 'app',
