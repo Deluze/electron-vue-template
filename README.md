@@ -17,7 +17,7 @@ Click the green **Use this template** button on top of the repository, and clone
 Clone this repository: `git clone git@github.com:Deluze/electron-vue-template.git`
 
 
-### Installing dependencies ⏬
+### Install dependencies ⏬
 
 ```bash
 npm install
