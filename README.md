@@ -10,20 +10,26 @@ Building the Electron (main) process is done with [Electron Builder](https://www
 
 ## Getting started
 
-Click the green **Use this template** button on top of the repository.
+Click the green **Use this template** button on top of the repository, and clone your own newly created repository.
 
-**Or...**
+**Or..**
 
-Clone this repository by executing the following commands:
+Clone this repository: `git clone git@github.com:Deluze/electron-vue-template.git`
+
+
+### Installing dependencies ⏬
 
 ```bash
-git clone https://github.com/Deluze/electron-vue-template
-cd electron-vue-template
 npm install
+```
+
+### Start developing ⚒️
+
+```bash
 npm run dev
 ```
 
-## Commands
+## Additional Commands
 
 ```bash
 npm run dev # starts application with hot reload
