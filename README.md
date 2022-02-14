@@ -1,19 +1,20 @@
 # Electron Vue Template
 
-A TypeScript starter template that's bundled together with **VueJS 3.x**, **Electron 16.x**, **ViteJS** and **Electron Builder** 👌
+A simple starter template for a **Vue3** + **Electron** TypeScript based application, including **ViteJS** and **Electron Builder**.
 
 ## About
 
-This project got inspired by [electron-vue](https://github.com/SimulatedGREG/electron-vue)
+This template utilizes [ViteJS](https://vitejs.dev) for building and serving your (Vue powered) front-end process, it provides Hot Reloads (HMR) to make development fast and easy ⚡ 
 
-This template uses [ViteJS](https://vitejs.dev) for the development server providing HMR (Hot Reload) while developing your Electron app.\
-Building the Electron application is done by [Electron Builder](https://www.electron.build/), making your application cross-platform and easily distributable, it also supports cross-platform compilation!
-
-This template doesn't come with any unnecessary dependencies and is unopinionated, so you can start developing your Electron / Vue applications however you want.
+Building the Electron (main) process is done with [Electron Builder](https://www.electron.build/), which makes your application easily distributable and supports cross-platform compilation 😎
 
 ## Getting started
 
-Execute the following commands to start developing straight away:
+Click the green **Use this template** button on top of the repository.
+
+**Or...**
+
+Clone this repository by executing the following commands:
 
 ```bash
 git clone https://github.com/Deluze/electron-vue-template
@@ -21,8 +22,6 @@ cd electron-vue-template
 npm install
 npm run dev
 ```
-
-That's all!
 
 ## Commands
 
