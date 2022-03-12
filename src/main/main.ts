@@ -1,12 +1,12 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
-const Path = require('path')
+import {app, BrowserWindow, ipcMain} from 'electron';
+import {join} from 'path';
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: Path.join(__dirname, 'preload.js'),
+      preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     }
@@ -17,7 +17,7 @@ function createWindow () {
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   }
   else {
-    mainWindow.loadFile(Path.join(app.getAppPath(), 'renderer', 'index.html'));
+    mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
   }
 }
 
