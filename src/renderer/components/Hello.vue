@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const msg = 'Electron + Vue3 template';
+</script>
+
 <template>
   <div id="hello">
     <img src="http://vuejs.org/images/logo.png">
@@ -18,19 +22,6 @@
     </ul>
   </div>
 </template>
-
-<script lang="ts">
-import {defineComponent} from 'vue';
-
-export default defineComponent({
-  setup() {
-    return {
-      msg: 'Electron + Vue 3 template'
-    }
-  }
-});
-
-</script>
 
 <style scoped>
 #hello {

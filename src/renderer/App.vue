@@ -1,21 +1,12 @@
-<template>
-  <div id="app">
-    <hello></hello>
-  </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
 import Hello from './components/Hello.vue'
 import { ipcRenderer } from './electron'
 
-export default defineComponent({
-  name: 'app',
-  components: {
-    Hello,
-  },
-  setup() {
-    ipcRenderer.send('message', 'Hello from App.vue!');
-  },
-})
+ipcRenderer.send('message', 'Hello from App.vue!');
 </script>
+
+<template>
+  <div id="app">
+    <Hello/>
+  </div>
+</template>
