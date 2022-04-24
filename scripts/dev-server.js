@@ -7,6 +7,7 @@ const Chalk = require('chalk');
 const Chokidar = require('chokidar');
 const Electron = require('electron');
 const compileTs = require('./private/tsc');
+const FileSystem = require('fs');
 
 let electronProcess = null;
 let rendererPort = 0;
@@ -66,6 +67,8 @@ async function start() {
 
     const devServer = await startRenderer();
     rendererPort = devServer.config.server.port;
+
+    FileSystem.cpSync(Path.join(__dirname, '..', 'src', 'main', 'static'), Path.join(__dirname, '..', 'build', 'main', 'static'), { recursive: true });
 
     startElectron();
 

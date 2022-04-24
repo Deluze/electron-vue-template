@@ -16,7 +16,6 @@ function buildRenderer() {
 
 function buildMain() {
     const mainPath = Path.join(__dirname, '..', 'src', 'main');
-    FileSystem.cpSync(Path.join(mainPath, 'static'), Path.join(__dirname, '..', 'build', 'main', 'static'));
     return compileTs(mainPath);
 }
 
