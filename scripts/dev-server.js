@@ -10,6 +10,7 @@ const compileTs = require('./private/tsc');
 const FileSystem = require('fs');
 
 let electronProcess = null;
+let electronProcessLocker = false;
 let rendererPort = 0;
 
 async function startRenderer() {
@@ -41,6 +42,7 @@ async function startElectron() {
         rendererPort,
     ];
     electronProcess = ChildProcess.spawn(Electron, args);
+    electronProcessLocker = false;
 
     electronProcess.stdout.on('data', data => {
         console.log(Chalk.blueBright(`[elecron] `) + Chalk.white(data.toString()));
@@ -56,8 +58,10 @@ function restartElectron() {
         electronProcess.kill();
         electronProcess = null;
     }
-
-    startElectron();
+    if (!electronProcessLocker) {
+        electronProcessLocker = true;
+        startElectron();
+    }
 }
 
 async function start() {
