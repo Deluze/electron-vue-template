@@ -42,13 +42,13 @@ async function startElectron() {
     ];
     electronProcess = ChildProcess.spawn(Electron, args);
 
-    electronProcess.stdout.on('data', data => {
-        console.log(Chalk.blueBright(`[elecron] `) + Chalk.white(data.toString()));
-    });
+    electronProcess.stdout.on('data', data => 
+        process.stdout.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
+    );
 
-    electronProcess.stderr.on('data', data => {
-        console.log(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()));
-    })
+    electronProcess.stderr.on('data', data => 
+        process.stderr.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
+    )
 }
 
 function restartElectron() {
@@ -61,18 +61,27 @@ function restartElectron() {
 }
 
 async function start() {
-    console.log(`${Chalk.blueBright('===============================')}`);
-    console.log(`${Chalk.blueBright('Starting Electron + Vite Dev Server...')}`);
-    console.log(`${Chalk.blueBright('===============================')}`);
+    console.log(`${Chalk.greenBright('=======================================')}`);
+    console.log(`${Chalk.greenBright('Starting Electron + Vite Dev Server...')}`);
+    console.log(`${Chalk.greenBright('=======================================')}`);
 
     const devServer = await startRenderer();
     rendererPort = devServer.config.server.port;
 
-    FileSystem.cpSync(Path.join(__dirname, '..', 'src', 'main', 'static'), Path.join(__dirname, '..', 'build', 'main', 'static'), { recursive: true });
+    FileSystem.cpSync(
+        Path.join(__dirname, '..', 'src', 'main', 'static'),
+        Path.join(__dirname, '..', 'build', 'main', 'static'),
+        { recursive: true }
+    );
 
     startElectron();
 
-    Chokidar.watch(Path.join(__dirname, '..', 'src', 'main')).on('change', () => {
+    const path = Path.join(__dirname, '..', 'src', 'main');
+    Chokidar.watch(path, {
+        cwd: path,
+    }).on('change', (path) => {
+        console.log(Chalk.blueBright(`[electron] `) + `Change in ${path}. reloading... 🚀`);
+
         restartElectron();
     })
 }
