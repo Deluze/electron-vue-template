@@ -9,6 +9,7 @@ const Electron = require('electron');
 const compileTs = require('./private/tsc');
 const FileSystem = require('fs');
 
+let viteServer = null;
 let electronProcess = null;
 let electronProcessLocker = false;
 let rendererPort = 0;
@@ -16,12 +17,12 @@ let rendererPort = 0;
 async function startRenderer() {
     const config = require(Path.join('..', 'config', 'vite.js'));
 
-    const server = await Vite.createServer({
+    viteServer = await Vite.createServer({
         ...config,
         mode: 'development',
     });
 
-    return server.listen();
+    return viteServer.listen();
 }
 
 async function startElectron() {
@@ -50,14 +51,18 @@ async function startElectron() {
 
     electronProcess.stderr.on('data', data => 
         process.stderr.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
-    )
+    );
+
+    electronProcess.on('exit', () => stop());
 }
 
 function restartElectron() {
     if (electronProcess) {
+        electronProcess.removeAllListeners('exit');
         electronProcess.kill();
         electronProcess = null;
     }
+
     if (!electronProcessLocker) {
         electronProcessLocker = true;
         startElectron();
@@ -80,6 +85,11 @@ function copy(path) {
     );
 }
 
+function stop() {
+    viteServer.close();
+    process.exit();
+}
+
 async function start() {
     console.log(`${Chalk.greenBright('=======================================')}`);
     console.log(`${Chalk.greenBright('Starting Electron + Vite Dev Server...')}`);
@@ -95,14 +105,14 @@ async function start() {
     Chokidar.watch(path, {
         cwd: path,
     }).on('change', (path) => {
+        console.log(Chalk.blueBright(`[electron] `) + `Change in ${path}. reloading... 🚀`);
+
         if (path.startsWith(Path.join('static', '/'))) {
             copy(path);
         }
 
-        console.log(Chalk.blueBright(`[electron] `) + `Change in ${path}. reloading... 🚀`);
-
         restartElectron();
-    })
+    });
 }
 
 start();
