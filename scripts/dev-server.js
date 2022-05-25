@@ -10,6 +10,7 @@ const compileTs = require('./private/tsc');
 const FileSystem = require('fs');
 
 let electronProcess = null;
+let electronProcessLocker = false;
 let rendererPort = 0;
 
 async function startRenderer() {
@@ -32,7 +33,7 @@ async function startElectron() {
         await compileTs(Path.join(__dirname, '..', 'src', 'main'));
     } catch {
         console.log(Chalk.redBright('Could not start Electron because of the above typescript error(s).'));
-
+        electronRestartLocker = false;
         return;
     }
 
@@ -41,6 +42,7 @@ async function startElectron() {
         rendererPort,
     ];
     electronProcess = ChildProcess.spawn(Electron, args);
+    electronProcessLocker = false;
 
     electronProcess.stdout.on('data', data => 
         process.stdout.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
@@ -56,8 +58,10 @@ function restartElectron() {
         electronProcess.kill();
         electronProcess = null;
     }
-
-    startElectron();
+    if (!electronProcessLocker) {
+        electronProcessLocker = true;
+        startElectron();
+    }
 }
 
 function copyStaticFiles() {
