@@ -36,7 +36,7 @@ npm run dev
 
 ```bash
 npm run dev # starts application with hot reload
-npm run build # builds application, distribution files can be found in "dist" folder
+npm run build # builds application, distributable files can be found in "dist" folder
 
 # OR
 
