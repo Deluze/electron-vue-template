@@ -1,3 +1,5 @@
+import * as Electron from 'electron';
+
 /**
  * Should match main/preload.ts for typescript support in renderer
  */
