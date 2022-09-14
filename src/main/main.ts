@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain} from 'electron';
+import {app, BrowserWindow, ipcMain, session} from 'electron';
 import {join} from 'path';
 
 function createWindow () {
@@ -23,6 +23,15 @@ function createWindow () {
 
 app.whenReady().then(() => {
   createWindow();
+
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ['script-src \'self\'']
+      }
+    })
+  })
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
