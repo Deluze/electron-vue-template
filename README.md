@@ -49,14 +49,10 @@ Optional configuration options can be found in the [Electron Builder CLI docs](h
 ## Project Structure
 
 ```bash
-- root
-  - config/
-    - vite.js # ViteJS configuration
-    - electron-builder.json # Electron Builder configuration
-  - scripts/ # all the scripts used to build or serve your application, change as you like.
-  - src/
-    - main/ # Main thread (Electron application source)
-    - renderer/ # Renderer thread (VueJS application source)
+- scripts/ # all the scripts used to build or serve your application, change as you like.
+- src/
+  - main/ # Main thread (Electron application source)
+  - renderer/ # Renderer thread (VueJS application source)
 ```
 
 ## Using static files

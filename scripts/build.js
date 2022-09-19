@@ -1,14 +1,12 @@
 const Path = require('path');
 const Chalk = require('chalk');
 const FileSystem = require('fs');
+const Vite = require('vite');
 const compileTs = require('./private/tsc');
 
 function buildRenderer() {
-    const Vite = require('vite');
-    const viteConfig = require(Path.join(__dirname, '..', 'config', 'vite.js'));
-
     return Vite.build({
-        ...viteConfig,
+        configFile: Path.join(__dirname, '..', 'vite.js'),
         base: './',
         mode: 'production'
     });

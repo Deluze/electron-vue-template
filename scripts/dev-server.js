@@ -15,10 +15,8 @@ let electronProcessLocker = false;
 let rendererPort = 0;
 
 async function startRenderer() {
-    const config = require(Path.join('..', 'config', 'vite.js'));
-
     viteServer = await Vite.createServer({
-        ...config,
+        configFile: Path.join(__dirname, '..', 'vite.js'),
         mode: 'development',
     });
 
