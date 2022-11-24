@@ -1,7 +1,8 @@
 import {app, BrowserWindow, ipcMain, session} from 'electron';
+import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer';
 import {join} from 'path';
 
-function createWindow () {
+async function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -14,14 +15,23 @@ function createWindow () {
 
   if (process.env.NODE_ENV === 'development') {
     const rendererPort = process.argv[2];
-    mainWindow.loadURL(`http://localhost:${rendererPort}`);
+    await mainWindow.loadURL(`http://localhost:${rendererPort}`);
+    mainWindow.webContents.openDevTools();
   }
   else {
     mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
   }
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      await installExtension(VUEJS3_DEVTOOLS)
+    } catch (e) {
+      console.error('Failed to install Vue Devtools:', (e as Error).toString())
+    }
+  }
+
   createWindow();
 
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
