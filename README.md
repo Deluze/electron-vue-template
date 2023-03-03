@@ -2,7 +2,7 @@
 
 # Electron Vue Template
   
-![image](https://user-images.githubusercontent.com/32544586/222551481-e468e719-b8aa-4e7d-bea6-474f725658ad.png)
+<img width="794" alt="image" src="https://user-images.githubusercontent.com/32544586/222748627-ee10c9a6-70d2-4e21-b23f-001dd8ec7238.png">
 
 A simple starter template for a **Vue3** + **Electron** TypeScript based application, including **ViteJS** and **Electron Builder**.
 </div>
