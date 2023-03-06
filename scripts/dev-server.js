@@ -8,6 +8,7 @@ const Chokidar = require('chokidar');
 const Electron = require('electron');
 const compileTs = require('./private/tsc');
 const FileSystem = require('fs');
+const { EOL } = require('os');
 
 let viteServer = null;
 let electronProcess = null;
@@ -43,9 +44,13 @@ async function startElectron() {
     electronProcess = ChildProcess.spawn(Electron, args);
     electronProcessLocker = false;
 
-    electronProcess.stdout.on('data', data => 
+    electronProcess.stdout.on('data', data => {
+        if (data == EOL) {
+            return;
+        }
+
         process.stdout.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
-    );
+    });
 
     electronProcess.stderr.on('data', data => 
         process.stderr.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
