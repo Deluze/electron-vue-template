@@ -16,7 +16,11 @@
         "target": ["snap"]
     },
     "files": [
-        "build/main/**/*",
+        {
+            "from": "build/main",
+            "to": "main",
+            "filter": ["**/*"]
+        },
         {
             "from": "build/renderer",
             "to": "renderer",
@@ -27,15 +31,18 @@
             "to": "static",
             "filter": ["**/*"]
         },
-        "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-        "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-        "!**/node_modules/*.d.ts",
-        "!**/node_modules/.bin",
-        "!src",
-        "!config",
-        "!README.md",
-        "!scripts",
-        "!build/renderer",
-        "!dist"
+        {
+            "from": "node_modules",
+            "to": "node_modules",
+            "filter": [
+                "**/*",
+                "!**/{CHANGELOG.md,README.md,README,readme.md,readme}",
+                "!**/{test,__tests__,tests,powered-test,example,examples}",
+                "!**/*.d.ts",
+                "!**/.bin"
+            ]
+        },
+        "!**/*",
+        "package.json"
     ]
 }
