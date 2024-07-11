@@ -31,17 +31,6 @@
             "to": "static",
             "filter": ["**/*"]
         },
-        {
-            "from": "node_modules",
-            "to": "node_modules",
-            "filter": [
-                "**/*",
-                "!**/{CHANGELOG.md,README.md,README,readme.md,readme}",
-                "!**/{test,__tests__,tests,powered-test,example,examples}",
-                "!**/*.d.ts",
-                "!**/.bin"
-            ]
-        },
         "!**/*",
         "package.json"
     ]
