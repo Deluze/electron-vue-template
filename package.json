@@ -19,8 +19,8 @@
     "@vitejs/plugin-vue": "^4.4.1",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
-    "electron": "^27.1.0",
-    "electron-builder": "^24.2.1",
+    "electron": "^32.1.2",
+    "electron-builder": "^25.1.6",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   },
