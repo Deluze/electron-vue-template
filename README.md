@@ -61,7 +61,7 @@ Optional configuration options can be found in the [Electron Builder CLI docs](h
 
 If you have any files that you want to copy over to the app directory after installation, you will need to add those files in your `src/main/static` directory.
 
-Files in said directory are only accessible to the `main` process, similar to `src/renderer/public` only being accessible to the `renderer` process. Besides that, the concept is the same as to what you're used to in your front-end projects.
+Files in said directory are only accessible to the `main` process, similar to `src/renderer/assets` only being accessible to the `renderer` process. Besides that, the concept is the same as to what you're used to in your other front-end projects.
 
 #### Referencing static files from your main process
 
