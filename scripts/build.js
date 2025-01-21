@@ -1,11 +1,14 @@
-const Path = require('path');
-const Chalk = require('chalk');
-const FileSystem = require('fs');
-const Vite = require('vite');
-const compileTs = require('./private/tsc');
+import Path from 'node:path';
+import FileSystem from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import Chalk from 'chalk';
+import { build } from 'vite';
+import compileTs from './private/tsc.js';
+
+const __dirname = Path.dirname(fileURLToPath(import.meta.url));
 
 function buildRenderer() {
-    return Vite.build({
+    return build({
         configFile: Path.join(__dirname, '..', 'vite.config.js'),
         base: './',
         mode: 'production'
