@@ -1,12 +1,14 @@
-const Path = require('path');
-const vuePlugin = require('@vitejs/plugin-vue')
+import Path from 'node:path'
+import vuePlugin from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import { fileURLToPath } from 'url';
 
-const { defineConfig } = require('vite');
+const __dirname = Path.dirname(fileURLToPath(import.meta.url));
 
 /**
  * https://vitejs.dev/config
  */
-const config = defineConfig({
+export default defineConfig({
     root: Path.join(__dirname, 'src', 'renderer'),
     publicDir: 'public',
     server: {
@@ -19,5 +21,3 @@ const config = defineConfig({
     },
     plugins: [vuePlugin()],
 });
-
-module.exports = config;

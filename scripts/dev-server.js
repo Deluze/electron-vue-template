@@ -1,22 +1,24 @@
 process.env.NODE_ENV = 'development';
 
-const Vite = require('vite');
-const ChildProcess = require('child_process');
-const Path = require('path');
-const Chalk = require('chalk');
-const Chokidar = require('chokidar');
-const Electron = require('electron');
-const compileTs = require('./private/tsc');
-const FileSystem = require('fs');
-const { EOL } = require('os');
+import { createServer } from 'vite';
+import ChildProcess from 'node:child_process';
+import Path from 'node:path';
+import FileSystem from 'node:fs';
+import { EOL } from 'node:os';
+import { fileURLToPath } from 'node:url';
+import Chalk from 'chalk';
+import Chokidar from 'chokidar';
+import Electron from 'electron';
+import compileTs from './private/tsc.js';
 
 let viteServer = null;
 let electronProcess = null;
 let electronProcessLocker = false;
 let rendererPort = 0;
+const __dirname = Path.dirname(fileURLToPath(import.meta.url));
 
 async function startRenderer() {
-    viteServer = await Vite.createServer({
+    viteServer = await createServer({
         configFile: Path.join(__dirname, '..', 'vite.config.js'),
         mode: 'development',
     });
@@ -45,14 +47,14 @@ async function startElectron() {
     electronProcessLocker = false;
 
     electronProcess.stdout.on('data', data => {
-        if (data == EOL) {
+        if (data === EOL) {
             return;
         }
 
         process.stdout.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
     });
 
-    electronProcess.stderr.on('data', data => 
+    electronProcess.stderr.on('data', data =>
         process.stderr.write(Chalk.blueBright(`[electron] `) + Chalk.white(data.toString()))
     );
 
