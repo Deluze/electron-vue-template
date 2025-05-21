@@ -1,0 +1,74 @@
+name: Build and Release EXE
+
+on: push
+
+jobs:
+  build-project:
+    name: Build EXE
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write 
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 23.9.0
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Electron app
+        run: npm run build  # This should produce the .exe in dist/
+
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: electron-exe
+          path: dist/*.exe  # Adjust if your .exe file path is different
+
+  release-project:
+    name: Release EXE on GitHub
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: build-project
+
+    steps:
+      - name: Download EXE artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: electron-exe
+
+      - name: Get EXE filename
+        id: get_exe
+        run: |
+          $exe = Get-ChildItem *.exe | Select-Object -ExpandProperty Name
+          echo "exe_name=$exe" >> $env:GITHUB_ENV
+          echo "::set-output name=exe_name::$exe"
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload .exe to GitHub Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ steps.get_exe.outputs.exe_name }}
+          asset_name: ${{ steps.get_exe.outputs.exe_name }}
+          asset_content_type: application/octet-stream

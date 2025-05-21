@@ -1,6 +1,6 @@
 {
   "name": "electron-vue-template",
-  "version": "0.1.0",
+  "version": "0.1.10",
   "description": "A minimal Electron + Vue application",
   "main": "main/main.js",
   "scripts": {
